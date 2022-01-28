@@ -38,9 +38,10 @@ async def progress(current, total, event, start, type_of_ps, file_name=None):
         estimated_total_time = elapsed_time + time_to_completion
         progress_str = "{0}{1} {2}%\n".format(
             "".join(["▰" for i in range(math.floor(percentage / 10))]),
-            "".join(["▱" for i in range(10 - math.floor(percentage / 10))]),
+            "".join(["▱" for _ in range(10 - math.floor(percentage / 10))]),
             round(percentage, 2),
         )
+
         tmp = progress_str + "{0} of {1}\nETA: {2}".format(
             humanbytes(current), humanbytes(total), time_formatter(estimated_total_time)
         )
@@ -140,7 +141,7 @@ async def download_video(v_url):
         with YoutubeDL(opts) as ytdl:
             ytdl_data = ytdl.extract_info(url)
     except DownloadError as DE:
-        await eor(v_url, f"`{str(DE)}`")
+        await eor(v_url, f'`{DE}`')
         return
     except ContentTooShortError:
         await eor(v_url, "`The download content was too short.`")
@@ -167,7 +168,7 @@ async def download_video(v_url):
         await eor(v_url, "`There was an error during info extraction.`")
         return
     except Exception as e:
-        await eor(v_url, f"{str(type(e)): {str(e)}}")
+        await eor(v_url, f'{str(type(e)): {e}}')
         return
     c_time = time.time()
     if song:

@@ -46,8 +46,7 @@ def check_is_black_list(chat_id):
 
 def rem_user_from_bl(chat_id):
     """remove from bl"""
-    __user = SESSION.query(blacklist).get(str(chat_id))
-    if __user:
+    if __user := SESSION.query(blacklist).get(str(chat_id)):
         SESSION.delete(__user)
         SESSION.commit()
 

@@ -55,8 +55,9 @@ async def _(event):
     if event.fwd_from:
         return
     input_str = event.pattern_match.group(1)
-    sample_url = "https://duckduckgo.com/?q={}".format(input_str.replace(" ", "+"))
-    if sample_url:
+    if sample_url := "https://duckduckgo.com/?q={}".format(
+        input_str.replace(" ", "+")
+    ):
         link = sample_url.rstrip()
         await eor(
             event,
@@ -75,8 +76,7 @@ async def _(event):
     sample_url = "https://da.gd/s?url=https://lmgtfy.com/?q={}%26iie=1".format(
         input_str.replace(" ", "+")
     )
-    response_api = requests.get(sample_url).text
-    if response_api:
+    if response_api := requests.get(sample_url).text:
         await eor(
             event,
             "[{}]({})\n`Thank me Later 🙃` ".format(input_str, response_api.rstrip()),

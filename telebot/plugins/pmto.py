@@ -15,10 +15,8 @@ async def pmto(event):
         chat_id = int(chat_id)
     except BaseException:
         pass
-    msg = ""
-    for i in b[1:]:
-        msg += i + " "
-    if msg == "":
+    msg = "".join(i + " " for i in b[1:])
+    if not msg:
         return
     try:
         await borg.send_message(chat_id, msg)

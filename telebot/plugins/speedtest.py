@@ -17,10 +17,10 @@ async def _(event):
     input_str = event.pattern_match.group(1)
     as_text = True
     as_document = False
-    if input_str == "image":
-        as_document = False
-    elif input_str == "file":
+    if input_str == "file":
         as_document = True
+    elif input_str == "image":
+        as_document = False
     elif input_str == "text":
         as_text = True
     await eor(event, "`Calculating my internet speed. Please wait!`")
@@ -38,9 +38,7 @@ async def _(event):
     client_infos = response.get("client")
     i_s_p = client_infos.get("isp")
     i_s_p_rating = client_infos.get("isprating")
-    reply_msg_id = event.message.id
-    if event.reply_to_msg_id:
-        reply_msg_id = event.reply_to_msg_id
+    reply_msg_id = event.reply_to_msg_id or event.message.id
     try:
         response = s.results.share()
         speedtest_image = response

@@ -50,9 +50,7 @@ async def _(event):
         # saves screenshot of entire page
         driver.close()
         await a.edit("Stopping Chrome BIN")
-        message_id = event.message.id
-        if event.reply_to_msg_id:
-            message_id = event.reply_to_msg_id
+        message_id = event.reply_to_msg_id or event.message.id
         with io.BytesIO(im_png) as out_file:
             out_file.name = "TeleBotScreenCapture.PNG"
             await event.client.send_file(

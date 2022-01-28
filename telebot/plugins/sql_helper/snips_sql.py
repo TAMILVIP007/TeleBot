@@ -67,7 +67,6 @@ def add_snip(
 
 
 def remove_snip(keyword):
-    note = SESSION.query(Snips).filter(Snips.snip == keyword)
-    if note:
+    if note := SESSION.query(Snips).filter(Snips.snip == keyword):
         note.delete()
         SESSION.commit()

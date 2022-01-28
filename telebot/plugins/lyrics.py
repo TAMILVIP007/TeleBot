@@ -29,8 +29,7 @@ async def _(event):
         await eor(event, "`What I am Supposed to find `")
         return
     song = ""
-    song = Song.find_song(query)
-    if song:
+    if song := Song.find_song(query):
         if song.lyrics:
             reply = song.format()
         else:
@@ -63,9 +62,7 @@ async def lyrics(lyric):
             "Error: please use '-' as divider for <artist> and <song> \neg: `.glyrics Nicki Minaj - Super Bass`"
         )
         return
-    if r"-" in query:
-        pass
-    else:
+    if r"-" not in query:
         await lyric.edit(
             "Error: please use '-' as divider for <artist> and <song> \neg: `.glyrics Nicki Minaj - Super Bass`"
         )

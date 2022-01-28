@@ -45,7 +45,7 @@ async def _(event):
             return await event.edit(
                 "**ERROR**:\n`Unknown Language!!\nCheck available languages `[here](https://github.com/nitanmarcel/rextester_py#languages)"
             )
-        return await event.edit(f"**ERROR:**\n`{str(e)}`")
+        return await event.edit(f'**ERROR:**\n`{e}`')
     out = f"**- Rextester**\n\n**Language:** `{lang}`\n**Code:** `{cmd}`\n\n**Output:** `{res}`\n\n"
     if err is not None:
         out += f"**Error:** `{err}`\n\n"

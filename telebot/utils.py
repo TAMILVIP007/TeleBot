@@ -10,8 +10,8 @@ import re
 import logging
 import inspect
 
-handler = Var.CMD_HNDLR if Var.CMD_HNDLR else r"\."
-sudo_hndlr = Var.SUDO_HNDLR if Var.SUDO_HNDLR else "!"
+handler = Var.CMD_HNDLR or r"\."
+sudo_hndlr = Var.SUDO_HNDLR or "!"
 
 
 def command(**args):
@@ -272,8 +272,10 @@ async def progress(current, total, event, start, type_of_ps, file_name=None):
         estimated_total_time = elapsed_time + time_to_completion
         progress_str = "[{0}{1}]\nProgress: {2}%\n".format(
             ''.join(["█" for i in range(math.floor(percentage / 5))]),
-            ''.join(["░" for i in range(20 - math.floor(percentage / 5))]),
-            round(percentage, 2))
+            ''.join(["░" for _ in range(20 - math.floor(percentage / 5))]),
+            round(percentage, 2),
+        )
+
         tmp = progress_str + \
             "{0} of {1}\nETA: {2}".format(
                 humanbytes(current),

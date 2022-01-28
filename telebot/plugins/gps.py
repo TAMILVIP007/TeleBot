@@ -30,9 +30,7 @@ async def gps(event):
     await eor(event, "Finding...")
 
     geolocator = Nominatim(user_agent="telebot")
-    geoloc = geolocator.geocode(input_str)
-
-    if geoloc:
+    if geoloc := geolocator.geocode(input_str):
         lon = geoloc.longitude
         lat = geoloc.latitude
         await reply_to_id.reply(

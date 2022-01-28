@@ -29,8 +29,7 @@ def add_channel(chat_id):
 
 
 def rm_channel(chat_id):
-    rem = SESSION.query(ghdb).get(str(chat_id))
-    if rem:
+    if rem := SESSION.query(ghdb).get(str(chat_id)):
         SESSION.delete(rem)
         SESSION.commit()
 
